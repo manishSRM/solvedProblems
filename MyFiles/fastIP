@@ -1,0 +1,19 @@
+#define gc() getchar_unlocked()
+int isSpaceChar(char c) {
+            return c == ' ' || c == '\n' || c == '\r' ;
+        }
+inline int FAST_IO()
+{
+    char ch;
+    int val=0;
+    ch=gc();
+    while(isSpaceChar(ch))
+            ch=gc();
+    val=0;
+    while(!isSpaceChar(ch))
+    {
+        val=(val*10)+(ch-'0');
+        ch=gc();
+    }
+    return val;
+}
