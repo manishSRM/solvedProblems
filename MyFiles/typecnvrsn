@@ -1,0 +1,58 @@
+Type Casting : changing one data type to another data type is known as type casting.
+
+Mainly it can be done in two ways:
+  1. Explicit type casting
+  2. Implicit type casting
+
+  1. Explicit type casting : In this type casting all things are shown clearly Like,
+		    
+		int i = (float)(P);
+	    here,
+		we see that, the value of variable p(float) it is converting to an int type 
+		and then copied to a new variable i.
+  	  
+  2. Implicit type casting : This is an hidden type castig. Like,
+        float n;
+		int r = n * n;
+		here,
+		we know that n * n gives a float value but actullay only integer part of 
+		this float number is copied to the variable r.  
+
+	**  If we compare the float type values then it is more better by this  way 
+	    abs (a - b) <= 0.0000001 rather than this (a == b) way.
+	    REASON::
+		when we use (a == b) if we consider a = 5.99999, b = 6.000001 like that then this condition 
+		is false by computer but actullay it is true because we ignore this difference. And
+		in this expression abs(a - b) <= 0.0000001 by calulating the absolute value of a - b mostly it is <= 0.0000001
+		  so, it is more superior than above in the case of floating number. 
+
+#DEFINE OPERATOR: It can be define as. 	
+	example :  1. #define MAX 1000 //preprocessor macro
+		   2. #define max (a, b)  (a > b ? a : b)  //preprocessor macro
+
+	1. In the #define statement if we intialize a variable then it never be changable in th whole program. 
+	So the value 		    of MAX is 1000 not change.   
+	2. #DEFINE must be in one line not in multiple line.
+	3. Their are three steps in Compilation Steps:
+		a. Preprocessing : 
+		b. Compiling : 
+		c. linking :
+  	so, in the preprocessing part all statements of the program which are used the  above define terms 
+  	then all are replacd with by the initalize values or expression.     	
+        We also understand with the above example,
+		In the first example all MAX variable with the value 1000 && max (a,b) by  (a > b ? a : b).	 
+
+TYPEDEF: It means that any data type is replaced by a particular name or we can rename the data type. And we diclare variables by that 		particular name.
+GENERAL FORM : typedef data type name;
+EXAMPLE::
+	typedef long long int lint; // data types renaming
+	typedef int var;
+
+using namespace std;
+
+int main() {
+    var t;
+    lint ch;
+   return 0;
+}	
+

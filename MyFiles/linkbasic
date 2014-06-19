@@ -1,0 +1,18 @@
+1.
+ struct vikas {
+    int data;                       //self referencial structure                     
+    vikas *next; 
+ };
+
+2.
+  int *ptr = NULL;
+  if (1) {
+     int save = 100;
+     cout << save;   //100
+     ptr = &save;
+  }
+  cout << *ptr;        //segmentation fault  
+    cout << save;
+  Reason: because save is a local variable of if so when we comes out from the if statment then the save is free space so we can't print its address. we don't know where it goes.
+     
+

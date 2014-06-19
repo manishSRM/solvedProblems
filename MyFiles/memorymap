@@ -1,0 +1,50 @@
+		MEMORY MAP
+when we make a code then we get memory for use is mainly three parts.
+1. data-segment:
+2. stack:
+3. code-segment:
+
+1. Data-segment:- It has three parts:
+	a. Data: This momory is mainly used by the initialized Global variables, static variables.
+		example:
+			int global = 100;  //initialized global variable 
+			int main() {}
+			so, the memory used by variable global it is in Data section.
+    
+	b. BSS: This part of the memory used by the uninitialized global variables, static variables.
+		example:
+			int global; 
+			int main() {}    //uninitialized global variable
+			the memory used by variable global it is in BSS section.
+
+	c. Heap:This part of the memory used by the varibles which are dynamically generated or variable which are used at the run time.
+		example:
+			int *num = new int;
+			so, here the memory used by num it is in the stack section and a memory of 4 byte is in the heap section from
+			new int statement.  
+2. Stack: This momory is mainly used by the local variables in the function.
+	example:
+		void swap (int a, int b) {
+				//body of fuction
+				}
+		int main() {
+			int num1, num2;
+			}
+		so, here their are two function one is main function and  second is swap function and four variables 2 are in different 		diffrent function but the memory used by all variable is in the stack section. 	 
+3. code-segment: This momory is used by the program code written by us.
+    
+ ________
+|       |	
+| code  |
+|=======|
+| data  |
+|_______|
+|  BSS  |
+|_______|
+|  heap |
+|       |
+|=======|
+|       |
+| stack |
+|       |
+|_______| 
