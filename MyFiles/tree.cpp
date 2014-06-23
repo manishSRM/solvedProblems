@@ -1,54 +1,69 @@
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <stdlib.h>
  
 using namespace std;
 
-struct node {
-	int data;
-	node *right;
-	node *left;
+struct TreeNode {
+    int data;
+    TreeNode *left, *right;
 };
 
-node *root = NULL;
-
-node *createNode (int i) {
-    node *temp = (node *) malloc (sizeof(node));
-    temp -> data = i;
-    temp -> left = NULL;
-    temp -> right = NULL;
+TreeNode *createNode (int num) {
+    TreeNode *temp = (TreeNode *)malloc(sizeof (TreeNode));
+    temp -> data = num;
+    temp -> left = temp -> right = NULL;
     return temp;
 }
 
-void insert (int value) {
-	if (root == NULL) {
-	  node *ptr = createNode (value);
-	  root = ptr;
-	}     
-	else {
-		node *ptr = createNode (value);
-
-	}
+void inorderTravel (TreeNode *root) {
+    if(root != NULL) {
+        inorderTravel (root -> left);
+        printf ("%d ", root -> data);
+        inorderTravel (root -> right);
+    } 
 }
 
-void initalizeTree ()
-
-void inorderPrint (node *temp) {
-	if ( temp != NULL ) {  
-		inorderPrint ( temp -> left );    
-        printf ("%d", temp -> data);     
-        inorderPrint ( temp -> right );   
+void preorderTravel (TreeNode *root) {
+    if (root != NULL){
+        printf ("%d ", root -> data);
+        preorderTravel (root -> left);
+        preorderTravel (root -> right);
     }
-} 
+}
 
+void postorderTravel (TreeNode *root) {
+    if (root != NULL) {
+        postorderTravel (root -> left);
+        postorderTravel (root -> right);
+        printf ("%d ", root -> data);
+    }
+}
 
-int main() {
-	int array[50];
-	for (int i = 0; i < 10; i++) {
-		scanf ("%d", &array [i]);
-	}
+int sumOfNodes (TreeNode *root) {
+	if (root == NULL)
+		return root -> data;
+	//printf("%d\n", root -> data);
+	int sum1 = sumOfNodes (root -> left);
+	int sum2 = sumOfNodes (root -> right);
 
-	inorderPrint (root);
-	
-	return 0;
+	return sum1 + sum2;
+}
+
+int main ()
+{
+    TreeNode *root = createNode (2);
+    root -> left = createNode (7);
+    root -> right = createNode (5);
+    root -> left -> left = createNode (2);
+    root -> left -> right = createNode (6);
+    root -> left -> right -> left = createNode (5);
+    root -> left -> right -> right = createNode (11);
+    root -> right -> right = createNode (9);
+    root -> right -> right -> left = createNode (4); 
+    //inorderTravel (root);
+   // preorderTravel (root);
+   // postorderTravel (root);
+    printf("%d\n", sumOfNodes (root));;
+    return 0;
 }
