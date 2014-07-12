@@ -19,17 +19,7 @@ int main () {
 		x -= temp;
 		y -= temp;
 
-		if (x == 0) {
-			if (y % 2 == 1)
-				ans += (2 * y) - 1;
-			else
-				ans += 2 * y;
-		} else {
-			if (x % 2 == 1)
-				ans += (2 * x) + 1;
-			else
-				ans += 2 * x;	
-		}
+		ans += (y * 2) - (y % 2) + (x * 2) + (x % 2);
 
 		printf("%d\n", ans);
 	}

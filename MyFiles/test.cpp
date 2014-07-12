@@ -2,15 +2,15 @@
 #include <algorithm>
 #include <vector>
 #include <stack>
+#include <set>
 #include <iostream>
 #include <utility>
 #include <string.h>
-
+    
 using namespace std;
 
 int main () {
-    int c = 1;
-    int b = --c+c+++c+++--c;
-    printf("%d %d\n", c, b);
-    return 0;
+    int mask = 10;
+    printf("%d\n", mask^3);
+    return  0;
 }
