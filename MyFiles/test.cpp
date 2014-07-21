@@ -9,8 +9,14 @@
     
 using namespace std;
 
+struct add {
+    int hour;
+    char colon;
+    int minute;
+} ad1;
+
 int main () {
-    int mask = 10;
-    printf("%d\n", mask^3);
-    return  0;
+    scanf ("%d %c %d", &ad1.hour, &ad1.colon, &ad1.minute);
+    printf("%d%c%d\n", ad1.hour, ad1.colon, ad1.minute);
+    return 0;
 }
