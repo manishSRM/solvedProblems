@@ -1,22 +1,7 @@
-8
-2
-5 3
-3 1
-5
-0
-01800.00
-0
-0.00100
-3
-x 0
-d 3
-# .
-0xd21#dd098x
-0
-0
-0
-1000
-0
-0000.0000
-0
-.0000
+6
+milk 58
+Ciel's Drink 80
+The curry 2nd edition 888888
+rice omelet 85855
+unagi 1
+   The first    and last letters can be a space    358
