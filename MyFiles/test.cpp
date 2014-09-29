@@ -3,27 +3,27 @@
 #include <vector>
 #include <limits.h>  
 #include <stack>
+#include <queue>
 #include <set>
+#include <assert.h>
 #include <iostream>
 #include <utility>
 #include <string.h>
 #include <cstring>
 #include <cstdlib>
+#include <cstdio>
+#include <iostream>
 
 using namespace std;
 
-void printPossibleValue_P_Q (int M) {
-
-    for (int i = 0; i <= M; i++) {
-        if (M - (2 * i) <= M && M - (2 * i) >= 0)
-            printf("(%d %d)\n", i, M - (2 * i));
-    }
-    return;
+void fib(int &b) { 
+    cout << b << endl;
+    b = 1; 
 }
 
-int main () 
-{
-    int M = 10;
-    printPossibleValue_P_Q (M);
+int main () {
+    int a = 9;
+    fib(a);
+    cout << a << endl;
     return 0;
 }

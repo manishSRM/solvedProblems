@@ -1,0 +1,61 @@
+
+/*****************************************CODE MAGNET**********************************************/
+
+P1: 
+#include <cstdio>
+#include <iostream>
+#define INNOVATE  ....
+
+#if INNOVATE
+#define check(x)  				 cout << ..x << ": " << x << endl;
+#define check(x, y)             cout << #x << ": " << x << " | " << #y << ": " << y << endl;
+#else
+#define check(x)
+#endif
+
+using namespace std;
+
+void show()
+
+int main() {
+	..... int N = ...;
+	for(int i = 2; i <= N / i; i++) {
+		.... temp = .....
+		show1 (temp)
+	}
+	return 0;
+}
+
+/*********************************************DEBUGGING*************************************************/
+
+P1:
+#inlude <cstido>
+
+using namespace std;
+
+main() {
+	int a = ?, b = 1;
+	sacnf("%d" &a);
+	switch (!b) {
+        case 1: cout <<"FIRST\n"; break;
+        if (b == 2) 
+            case 2: cout <<"SECOND\n"; break; 
+        else case 3:
+            cout << "THIRD\n"; break;
+    }
+    return 0;
+}
+
+/************************************************OUTPUT*******************************************************/
+
+P1:
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+	printf("%d", 0b0010);
+	printf("%4$d %3$d %2$d %1$d", 1, 2, 3, 9);
+	return 0;
+}

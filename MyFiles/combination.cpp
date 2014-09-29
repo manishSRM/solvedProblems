@@ -1,5 +1,5 @@
 #include <cstdio>
-#define MOD 4
+#define MOD 1000000007
 
 using namespace std;
 

@@ -39,12 +39,11 @@ void mergesort(int *a, int*b, int low, int high)
 }
  
 int main() {
-    int num;
     int a[] = {12, 10, 43, 23, -78, 45, 123, 56, 98, 41, 90, 24};
-    num = sizeof(a)/sizeof(int);
-    int b[num];
-    mergesort(a,b,0,num-1);
-    for(int i = 0; i < num; i++)
+    int N = sizeof(a)/sizeof(int);
+    int b[N];
+    mergesort(a, b, 0, N-1);
+    for(int i = 0; i < N; i++)
         printf("%d ", a[i]);
     printf("\n");
 }
