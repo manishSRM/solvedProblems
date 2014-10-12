@@ -10,6 +10,7 @@
 #include <utility>
 #include <string.h>
 #include <cstring>
+#include <limits.h>
 #include <cstdlib>
 #include <cstdio>
 #include <iostream>
@@ -29,13 +30,33 @@ typedef vector<lint> VLI;
 typedef vector<PI> VPI;
 typedef vector<VI> VII;
 
+
+
 int main() {
-    vector<int> v{1,2,3,1,2,3,3,4,5,4,5,6,7};
-    sort(v.begin(), v.end()); 
-    auto last = unique(v.begin(), v.end());
-    v.erase(last, v.end());
-    for (const auto& i : v)
-      cout << i << " ";
-    cout << "\n";   
-    return 0;
+	int T, N;
+	SC(T);
+	while(T--) {
+		int flag = 0, d = INT_MIN, k;
+		SC(N);
+		while (N) {
+			k = d;
+			d = N % 10;
+			N = N / 10;
+			if (k == d && k==1) {
+				flag = 1;
+				break;
+			}
+			else if (d > 1 || k > d ) {
+				flag = 1;
+				break;
+			}
+
+		}
+		if (flag) 
+			printf("YES");
+		else
+			printf("NO");
+			printf("\n");
+		}		 
+	return 0;
 }

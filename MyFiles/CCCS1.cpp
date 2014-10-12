@@ -29,13 +29,23 @@ typedef vector<lint> VLI;
 typedef vector<PI> VPI;
 typedef vector<VI> VII;
 
-int main() {
-    vector<int> v{1,2,3,1,2,3,3,4,5,4,5,6,7};
-    sort(v.begin(), v.end()); 
-    auto last = unique(v.begin(), v.end());
-    v.erase(last, v.end());
-    for (const auto& i : v)
-      cout << i << " ";
-    cout << "\n";   
+int main () {
+	int T, N, D, O;
+	SC(T);
+	while(T--) {
+		SC(N);
+		lint maxSum = 0;
+		EFOR(i, 1, N) {
+			SC(D); SC(O);
+			int n = O / D;
+			int A = O + (n - 1) * (-1 * D);
+			maxSum += (n * (O + A)) / 2;
+			maxSum += O % D;
+		}
+		if(maxSum % 2 != 0) 
+			printf("YES\n");
+		else
+		 	printf("NO\n");	
+	} 
     return 0;
 }
