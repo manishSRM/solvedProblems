@@ -69,7 +69,7 @@ void solveQueryTwo (int x, VVI &dishScore, VI &index, CHECK &visited, int size) 
 	EFOR(i, 1, size) {
 		if (index[x] == x) {
 			printf("%d\n", x);
-			return ;
+			return;
 		}
 		else 
 			x = index[x];	
@@ -81,7 +81,7 @@ void solveQuery (int query, VVI &dishScore, VI &index, CHECK &visited, int size)
 		int first, x, y;
 		scanf ("%d", &first);
 		if (first == 0)
-			scanf ("%d %d", &x, &y);
+			scanf ("%d%d", &x, &y);
 		else
 			scanf("%d", &x);
 		if (first == 0) 

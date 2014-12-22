@@ -40,13 +40,13 @@ void Build_Max_Heap (VI &A) {
     return;
 }
 
-void heap_sort (VI &A) {
-    int size_A = A.size ();
+void heapSort (VI &A) {
+    int heapSize = A.size ();
     Build_Max_Heap (A);
     RFOR (pos, A.size () - 1, 1) {
         swap (A[0], A[pos]);
-        --size_A;
-        Max_Heapify (A, 0, size_A);
+        --heapSize;
+        Max_Heapify (A, 0, heapSize);
     }
     return;
 }
@@ -59,7 +59,7 @@ int main ()
     FOR(i, 0, N)
         scanf ("%d", &A[i]);
     cout << "SORTED ORDER WILL BE : ";
-    heap_sort (A);
+    heapSort (A);
     FOR(j, 0, N)
         printf("%d ", A[j]);
     printf("\n");    

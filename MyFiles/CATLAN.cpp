@@ -33,3 +33,15 @@ typedef vector<lint> VLI;
 typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
+
+int main () {
+    int N;
+    SC(N);
+    VLI catalanNumber(N + 1);
+    catalanNumber[0] = 1;
+    FOR(i, 0, N) {
+    	catalanNumber[i + 1] = (((4 * i) + 2) * catalanNumber[i]) / (i + 2);
+    }
+    printf("%lld\n", catalanNumber[N]);
+    return 0;
+}

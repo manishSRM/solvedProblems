@@ -7,7 +7,6 @@
 #include <stack>
 #include <queue>
 #include <set>
-#include <map>
 #include <assert.h>
 #include <iostream>
 #include <utility>
@@ -32,4 +31,26 @@ typedef vector<int> VI;
 typedef vector<lint> VLI;
 typedef vector<PI> VPI;
 typedef vector<VI> VVI;
-typedef map<int,int> MP;
+
+int main () {
+    int T;
+    SC(T);
+    while(T--) {
+    	int N;
+    	SC(N);
+    	VI A(N + 1);
+    	EFOR(i, 1, N) 
+    		SC(A[i]);
+    	VI::iterator it = max_element(A.begin(), A.end());
+    	VI count((*it) + 1, 0);
+    	EFOR(i, 1, N) 
+    		++count[A[i]];	
+    	int C = 0;
+    	EFOR(j, 1, (*it)) {
+    		if(count[j])
+    			++C;
+    	}
+    	printf("%d\n", C);
+    } 
+    return 0;
+}

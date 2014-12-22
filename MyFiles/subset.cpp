@@ -9,7 +9,7 @@ int isBitSet (int mask, int k) {
 }
 
 void printSubset (int n) {
-	for(int mask = 0; mask < (1 << n); mask++) {
+	for(int mask = 1; mask < (1 << n); mask++) {
 		for(int k = 0; k < n; k++) {
 			if(isBitSet(mask, k))
 				printf("%d ", A[k]);

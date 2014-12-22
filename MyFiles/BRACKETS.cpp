@@ -7,7 +7,6 @@
 #include <stack>
 #include <queue>
 #include <set>
-#include <map>
 #include <assert.h>
 #include <iostream>
 #include <utility>
@@ -16,6 +15,7 @@
 #include <cstdlib>
 #include <cstdio>
 
+#define MAX 100004
 #define FOR(A, B, C) for(int A = B; A < C; A++)
 #define EFOR(A, B, C) for(int A = B; A <= C; A++)
 #define RFOR(A, B, C) for(int A = B; A >= C; A--)
@@ -32,4 +32,30 @@ typedef vector<int> VI;
 typedef vector<lint> VLI;
 typedef vector<PI> VPI;
 typedef vector<VI> VVI;
-typedef map<int,int> MP;
+
+int FUNCTION(char *str) {
+	int balance = 0, maxBalance = 0;
+	FOR(i, 0, strlen(str)) {
+		if(str[i] == '(') balance++;
+		if(str[i] == ')') balance--;
+		maxBalance = max(maxBalance, balance);
+	}
+	return maxBalance;
+}
+
+int main () {
+    int T;
+    SC(T);
+    while(T--) {
+    	char str[MAX];
+    	scanf("%s", str);
+    	int l = FUNCTION(str);
+    	//printf("%d\n", l);
+    	EFOR(i, 1, l) 
+    		printf("(");
+    	EFOR(j, 1, l) 
+    		printf(")");		
+    	printf("\n");
+    } 
+    return 0;
+}

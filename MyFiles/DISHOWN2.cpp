@@ -11,7 +11,7 @@
 using namespace std;
 
 typedef pair<int, int> II;
-typedef vector<int> VI;
+typedef vector<int> VI; 
 typedef vector<II> VII;
 typedef vector<bool> CHECK;
 typedef vector<vector<int> > VVI;

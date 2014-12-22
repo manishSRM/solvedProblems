@@ -28,12 +28,13 @@ typedef vector<int> VI;
 typedef vector<lint> VLI;
 typedef vector<PI> VPI;
 typedef vector<VI> VII;
+typedef set<int> ST;
 
 int main () {
     int N, M;
     SC(N);
     VI A (N + 1);
-    vector<set<int> > myset;
+    set<int> myset[6];
     EFOR(i, 1, N) {
     	SC(A[i]);
         if(A[i] % 2 == 0) myset[2].insert(i);
@@ -45,15 +46,15 @@ int main () {
     while(M--) {
     	SC(query);
     	if(query == 1) {
-    		SC(l);SC(r);SC(p);
-    		int a = lower_bound(myset[p].begin, myset[p].end, l);
+    		SC(l); SC(r); SC(p);
             vector<int> deleteFromSet;
-            for(set<int>::iterator it = a; it != myset[p].end; it++) {
-                if(it > r)
+            set<int>::iterator it = lower_bound(myset[p].begin(), myset[p].end(), l);
+            for(; it != myset[p].end(); it++) {
+                if(*it > r)
                     break;
-                A[it] /= p;
-                if(A[it] % p)
-                    deleteFromSet.push_back(it);     
+                A[*it] /= p;
+                if(A[*it] % p)
+                    deleteFromSet.push_back(*it);     
             }
             for(vector<int>::iterator it = deleteFromSet.begin(); it != deleteFromSet.end(); it++) 
                 myset[p].erase(*it);
@@ -64,10 +65,11 @@ int main () {
             if(A[l] % 3 == 0) myset[3].erase(l);
             if(A[l] % 5 == 0) myset[5].erase(l);
 
-            if(d % 2 == 0) myset[2].insert(d);
-            if(d % 3 == 0) myset[3].insert(d);
-            if(d % 5 == 0) myset[5].insert(d);
-    	}
+            if(d % 2 == 0) myset[2].insert(l);
+            if(d % 3 == 0) myset[3].insert(l);
+            if(d % 5 == 0) myset[5].insert(l);
+    	    A[l] = d;
+        }
     }
     EFOR(j, 1, N)
     	printf("%d ", A[j]);
