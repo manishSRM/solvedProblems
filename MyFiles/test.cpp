@@ -33,3 +33,7 @@ typedef vector<lint> VLI;
 typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
+
+int main() {
+    return 0;
+}

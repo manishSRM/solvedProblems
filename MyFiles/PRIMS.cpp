@@ -38,29 +38,42 @@ typedef map<int,int> MP;
 typedef pair<int, pair<int, int> > PP;
 typedef vector<PP> VPP;
 
+void checkSetContent(const set <PI> &Q) {
+	set<PI> :: iterator it = Q.begin();
+	for(; it != Q.end(); it++) {
+		printf("%d %d\n", it -> second, it -> first);
+	}
+	printf("\n");
+	return;
+}
+
 void Prims(const VVPI &edgeList, VPI &result, int N, int source) {
 	VB checkVertex(N + 1, false);
-	VI distance(N + 1, INT_MAX);
+	VI distance(N + 1, INT_MAX), parent(N + 1);
 	distance[source] = 0;
+	parent[source] = source;
 	set<PI> Q;
-	distance[source] = 0;
-	EFOR(i, 1, N) {
-		Q.insert(make_pair(distance[i], i));
-	}
+	Q.insert(make_pair(distance[source], source));
 	while(!Q.empty()) {
 		PI top = *Q.begin();
 		Q.erase(Q.begin());
 		int u = top.second;
+		checkVertex[u] = true;
+		if(parent[u] != u) {
+			result.push_back(make_pair(parent[u], u));
+		}
 		FOR(i, 0, edgeList[u].size()) {
 	 		int v = edgeList[u][i].first;
 			int w = edgeList[u][i].second;
-	 		if(Q.count(make_pair(distance[v], v)) && w < distance[top.second]) {
-	 			distance[top.second] = w;
+	 		if(w < distance[v] && checkVertex[v] != true) {
+	 			if(distance[v] != INT_MAX) {
+	 				Q.erase(Q.find(make_pair(distance[v], v)));
+	 			}
+	 			distance[v] = w;
+	 			parent[v] = u;
+	 			Q.insert(make_pair(distance[v], v));
 	 		}
 		}
-	}
-	EFOR(i, 1, N) {
-		printf("%d ", distance[i]);
 	}	
 }	
 
