@@ -212,3 +212,6 @@ but j is not...besause j is local variable and it is only asscible in the main()
   1. push(), pop(), size(), front(), back();
 #include <stack>
   1.push (), pop (), top (), size ();  
+
+
+  
