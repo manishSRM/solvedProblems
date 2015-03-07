@@ -1,26 +1,21 @@
-#include<iostream>
-#include<stdio.h>
-#include<stdlib.h>
+#include <cstdio>
 
 using namespace std;
 
-void magic (int t) {
-	int p, k;
-	long long int x, n;
-	while (t--) {
-		scanf ("%lld", &n);
-		for (k = 0; k < n; k++) {
-			scanf ("%d", &p);
+int main () {
+	int T, N, C; 
+	scanf ("%d", &T);
+	while (T--) {
+		scanf ("%d %d", &C, &N);
+		int maxSum = 0
+		for (int i = 1; i <= N; i++) {
+			scanf ("%d", &x);
+			maxSum += x;
 		}
-		x = n * (n - 1);
-    	printf ("%lld", x / 2);
-    	printf ("\n");
+		if (maxSum >= C) 
+			printf("Yes\n");
+		else
+			printf("No\n");
 	}
-}
-
-int main() {
-	int t, ans;
-	scanf ("%d", &t);
-	magic (t);
-	return 0;    	
-} 
+	return 0;
+}q

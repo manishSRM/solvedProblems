@@ -7,7 +7,7 @@ int main () {
 	scanf ("%d", &T);
 	while (T--) {
 		scanf ("%d %d", &C, &N);
-		int maxSum = 0
+		int maxSum = 0, x;
 		for (int i = 1; i <= N; i++) {
 			scanf ("%d", &x);
 			maxSum += x;
