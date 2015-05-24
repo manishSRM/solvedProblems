@@ -92,22 +92,22 @@ void deleteFromLast () {
 }
 
 int main() {       
-	for (int i = 72; i > 71; i--) {
+	for (int i = 70; i > 64; i--) {
 	    node *temp = createNewNode (i);
         temp -> next = head;
         head =  temp;
     }
-    printList (head);
-    printf ("\n");
-    node *np = createNewNode (72);
-    insertNode_beg (np);
-    insertNodeAtEnd (np);
-    delete_beg ();
-    printList (head);
-    printf ("\n");
-    deleteCountNodesFromBeginning (9);
-    deleteFromLast ();
-    printList (head);
-    printf ("\n");
+    //printList (head);
+    // printf ("\n");
+    // node *np = createNewNode (72);
+    // insertNode_beg (np);
+    // insertNodeAtEnd (np);
+     delete_beg ();
+    // printList (head);
+    // printf ("\n");
+    // deleteCountNodesFromBeginning (9);
+    // deleteFromLast ();
+     printList (head);
+    // printf ("\n");
     return 0;     
 }

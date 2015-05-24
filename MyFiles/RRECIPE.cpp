@@ -22,6 +22,9 @@
 #define EFOR(A, B, C) for(int A = B; A <= C; A++)
 #define RFOR(A, B, C) for(int A = B; A >= C; A--)
 
+#define MAX 1000002
+#define MOD 10000009
+
 #define SC(A) scanf("%d", &A)
 #define PF(A) printf("%d", A)
 
@@ -36,44 +39,32 @@ typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
 
-int doesPatternExist(char text[], int index, char pattern[], int m) {
-    int c = 0;
-    FOR(i, index, (index + m)) {
-        if(text[i] != pattern[c++])
-            return 0;
-    }
-    return 1;
-}
-int searchStringOccurance(char text[], char pattern[]) {
-    int n = strlen(text);
-    int m = strlen(pattern);
-    EFOR(i, 0, (n - m)) {
-        if(doesPatternExist(text, i, pattern, m))
-            return i;
-    }
-    return -1;
-}
-
-int cmp(const PI &A, const PI &B) {
-    return (A.second > B.second) ? 1 : 0;
-}
-
 int main() {
-    VPI A;
-    FOR(i, 0, 6) {
-        int x, y;
-        SC(x); SC(y);
-        A.push_back(make_pair(x, y));
-    }
-    sort(A.begin(), A.end(), cmp);
-    VPI :: iterator it = A.begin();
-    for(; it != A.end(); it++) {
-        printf("%d %d\n", it->first, it->second);
+    int T;
+    SC(T);
+    while(T--) {
+        char str[MAX];
+        scanf("%s", str);
+        int len = strlen(str);
+        int N = len;
+        if(!(len % 2)) {
+            len = (len / 2) - 1;
+        } else {
+            len /= 2;
+        }
+        lint answer = 1;
+        EFOR(i, 0, len) {
+            if(str[i] != str[N - i - 1] && str[i] != '?' && str[N - i - 1] != '?') {
+                answer *= 0;
+                break;
+            } else if(str[i] == str[N - i - 1] && str[i] == '?') {
+                answer = (answer * 26) % MOD;
+            }
+        }
+        printf("%lld\n", answer);
     }
     return 0;
 }
-
-
 
 
 

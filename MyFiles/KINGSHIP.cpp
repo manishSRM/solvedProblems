@@ -36,50 +36,40 @@ typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
 
-int doesPatternExist(char text[], int index, char pattern[], int m) {
-    int c = 0;
-    FOR(i, index, (index + m)) {
-        if(text[i] != pattern[c++])
-            return 0;
+inline int scanme() {
+    int n = 0 ;
+    char c = getchar_unlocked();
+    while(!('0'<=c && c<='9')) {
+        c = getchar_unlocked();
     }
-    return 1;
-}
-int searchStringOccurance(char text[], char pattern[]) {
-    int n = strlen(text);
-    int m = strlen(pattern);
-    EFOR(i, 0, (n - m)) {
-        if(doesPatternExist(text, i, pattern, m))
-            return i;
+    while('0'<=c && c<='9') {
+        n = n*10 + c -'0';
+        c = getchar_unlocked();
     }
-    return -1;
-}
-
-int cmp(const PI &A, const PI &B) {
-    return (A.second > B.second) ? 1 : 0;
+    return n ;
 }
 
 int main() {
-    VPI A;
-    FOR(i, 0, 6) {
-        int x, y;
-        SC(x); SC(y);
-        A.push_back(make_pair(x, y));
-    }
-    sort(A.begin(), A.end(), cmp);
-    VPI :: iterator it = A.begin();
-    for(; it != A.end(); it++) {
-        printf("%d %d\n", it->first, it->second);
+    int T;
+    T = scanme();
+    while(T--) {
+        int N;
+        lint answer = 0;
+        lint MIN = INT_MAX;
+        N = scanme();
+        VI A(N + 1);
+        EFOR(i, 1, N) {
+            A[i] = scanme();
+            answer += A[i];
+            if(A[i] < MIN) {
+                MIN = A[i];
+            }
+        }
+        answer -= MIN;
+        printf("%lld\n", answer * MIN);
     }
     return 0;
 }
-
-
-
-
-
-
-
-
 
 
 
