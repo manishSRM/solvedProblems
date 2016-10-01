@@ -36,37 +36,29 @@ typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
 
-int partition (VI &A, int p, int r) {
-	int x = A[r];
-	int i = p - 1;
-	EFOR(j, p, r - 1) {
-		if (A[j] <= x) {
-			i += 1;
-			swap(A[j], A[i]);
-		}
-	}
-	swap(A[i + 1], A[r]);
-	return (i + 1);
+int main() {
+    int T;
+    SC(T);
+    while(T--) {
+        int N;
+        SC(N);
+        VI A(N + 1);
+        FOR(i, 0, N) {
+            SC(A[i]);
+        }
+        VI C(102, 0);
+        FOR(j, 0, N) {
+            C[A[j]]++;
+        }
+        int Count = 0;
+        FOR(k, 0, 101) {
+            if(C[k]) {
+                Count++;
+            }
+        }
+        printf("%d\n", Count);
+    }
+    return 0;
 }
 
-void quickSort (VI &A, int p, int r) {
-	if (p < r) {
-		int q = partition(A, p, r);
-		quickSort(A, p, q - 1);
-		quickSort(A, q + 1, r);
-	}
-}
 
-int main () {
-	int N;
-	SC(N);
-	VI A(N);
-	FOR (i, 0, N) {
-		SC(A[i]);
-	}
-	quickSort (A, 0, N-1);
-	FOR(i, 0, N)
-		printf("%d ", A[i]);
-	printf("\n");
-	return 0;
-}

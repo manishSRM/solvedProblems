@@ -23,6 +23,7 @@
 #define RFOR(A, B, C) for(int A = B; A >= C; A--)
 
 #define SC(A) scanf("%d", &A)
+#define SCC(A) scanf("%lld", &A)
 #define PF(A) printf("%d", A)
 
 using namespace std;
@@ -36,37 +37,32 @@ typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
 
-int partition (VI &A, int p, int r) {
-	int x = A[r];
-	int i = p - 1;
-	EFOR(j, p, r - 1) {
-		if (A[j] <= x) {
-			i += 1;
-			swap(A[j], A[i]);
-		}
-	}
-	swap(A[i + 1], A[r]);
-	return (i + 1);
+int max(int a, int b) {
+    return (a>b) ? a : b;
 }
 
-void quickSort (VI &A, int p, int r) {
-	if (p < r) {
-		int q = partition(A, p, r);
-		quickSort(A, p, q - 1);
-		quickSort(A, q + 1, r);
-	}
+int main() {
+    int N;
+    lint X, negativeSum = 0, l;
+    SC(N);
+    VLI A(N), V;
+    FOR(i, 0, N) {
+        SCC(A[i]);
+        if(A[i] < 0)
+            V.push_back(-A[i]);
+    }
+    sort(V.begin(), V.end());
+    SCC(X);
+    if(V.size() <= X) {
+        l = 0;
+    } else {
+        l = V[V.size() - X - 1];
+    }
+    negativeSum = l * X;
+    for(int i = max(V.size() - X, 0); i < V.size(); i++)
+        negativeSum+= V[i] - l;
+    printf("%lld\n", negativeSum);
+    return 0;
 }
 
-int main () {
-	int N;
-	SC(N);
-	VI A(N);
-	FOR (i, 0, N) {
-		SC(A[i]);
-	}
-	quickSort (A, 0, N-1);
-	FOR(i, 0, N)
-		printf("%d ", A[i]);
-	printf("\n");
-	return 0;
-}
+

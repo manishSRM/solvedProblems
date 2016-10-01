@@ -1,49 +1,65 @@
 #include <cstdio>
-#include <vector>
 #include <algorithm>
 #include <iostream>
-#include <queue>
 #include <cmath>
+#include <vector>
+#include <limits.h>
+#include <stack>
+#include <queue>
+#include <iomanip>
+#include <list>
+#include <set>
+#include <deque>
+#include <bitset>
+#include <map>
+#include <assert.h>
+#include <utility>
+#include <string.h>
+#include <cstring>
+#include <cstdlib>
 
-#define FOR(A,B,C) for(int A = B; A < C; A++)
-#define EFOR(A,B,C) for(int A = B; A <= C; A++)
-#define RFOR(A,B,C) for(int A = B; A >= C; A--)
-#define PB(A,B) A.push_back(B);
-#define VI vector<int>
-#define VL vector<long>
+#define FOR(A, B, C) for(int A = B; A < C; A++)
+#define EFOR(A, B, C) for(int A = B; A <= C; A++)
+#define RFOR(A, B, C) for(int A = B; A >= C; A--)
+
+#define SC(A) scanf("%d", &A)
+#define PF(A) printf("%d", A)
 
 using namespace std;
 
+typedef long long int lint;
+typedef vector<bool> VB;
+typedef pair<int,int> PI;
+typedef vector<int> VI;
+typedef vector<lint> VLI;
+typedef vector<PI> VPI;
+typedef vector<VI> VVI;
+typedef map<int,int> MP;
+
 void Max_Heapify (VI &A, int pos, int heap_size) {
-    int larger = pos, l_value = A[pos];
-    while (1) {
-        int left = (pos + 1) << 1 - 1;
-        int right = (pos + 1) << 1;
-        if (left <= (heap_size - 1) && A[left] > l_value)
-            larger = left;
-        if (right <= (heap_size - 1) && A[right] > A[larger])
-            larger = right;
-        if (larger != pos) {
-            A[pos] = A[larger];
-            pos = larger;
-        }   
-        else
-            break;
+    int larger = pos;
+    int left = (pos << 1) + 1;
+    int right = (pos << 1) + 2;
+    if (left < heap_size && A[left] > A[larger])
+        larger = left;
+    if (right < heap_size && A[right] > A[larger])
+        larger = right;
+    if (larger != pos) {
+        swap(A[pos], A[larger]);
+        Max_Heapify(A, larger, heap_size);
     }
-    A[pos] = l_value;
-    return;
 }
 
 void Build_Max_Heap (VI &A) {
-    RFOR (pos, A.size () / 2 - 1, 0) 
-        Max_Heapify (A, pos, A.size ());
+    RFOR (pos, (A.size()/2)-1, 0)
+        Max_Heapify (A, pos, A.size());
     return;
 }
 
 void heapSort (VI &A) {
-    int heapSize = A.size ();
+    int heapSize = A.size();
     Build_Max_Heap (A);
-    RFOR (pos, A.size () - 1, 1) {
+    RFOR (pos, A.size()-1, 1) {
         swap (A[0], A[pos]);
         --heapSize;
         Max_Heapify (A, 0, heapSize);
@@ -51,17 +67,15 @@ void heapSort (VI &A) {
     return;
 }
 
-int main ()
-{
+int main () {
     int N;
-    scanf ("%d", &N);
+    SC(N);
     VI A(N);
     FOR(i, 0, N)
-        scanf ("%d", &A[i]);
-    cout << "SORTED ORDER WILL BE : ";
+        SC(A[i]);
     heapSort (A);
     FOR(j, 0, N)
         printf("%d ", A[j]);
-    printf("\n");    
+    cout << endl;
     return 0;
 }

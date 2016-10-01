@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 #include <cmath>
 #include <vector>
 #include <limits.h>
@@ -36,49 +37,108 @@ typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
 
-int doesPatternExist(char text[], int index, char pattern[], int m) {
-    int c = 0;
-    FOR(i, index, (index + m)) {
-        if(text[i] != pattern[c++])
-            return 0;
-    }
-    return 1;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+TreeNode *createNewNode(int data) {
+    TreeNode *temp = new TreeNode(data);
+    return temp;
 }
-int searchStringOccurance(char text[], char pattern[]) {
-    int n = strlen(text);
-    int m = strlen(pattern);
-    EFOR(i, 0, (n - m)) {
-        if(doesPatternExist(text, i, pattern, m))
+
+TreeNode *createTree() {
+    TreeNode *p = createNewNode(1);
+    TreeNode *t = createNewNode(2);
+    p -> left = t;
+    t = createNewNode(5);
+    p -> right = t;
+    t = createNewNode(4);
+    p -> left -> right = t;
+    // t = createNewNode(13);
+    // p -> right -> left = t;
+    t = createNewNode(3);
+    p -> left -> left = t;
+    t = createNewNode(6);
+    p -> right -> right = t;
+    // t = createNewNode(6);
+    // p -> left -> right -> left = t;
+    // t = createNewNode(8);
+    // p -> left -> left -> right -> left = t;
+    // t = createNewNode(13);
+    // p -> right -> left = t;
+    // t = createNewNode(14);
+    // p -> right -> left -> right = t;
+    return p;
+}
+
+void printInOrder(TreeNode *root) {
+    if (root == NULL) {
+        return;
+    }
+    printInOrder(root -> left);
+    printf("%d\n", root -> val);
+    printInOrder(root -> right);
+}
+
+TreeNode *buildTree(VI &inOrder, VI &preOrder, int first, int last, int &preIndex) {
+    if (first > last) {
+        return NULL;
+    }
+    TreeNode *temp = new TreeNode((preOrder[preIndex++]));
+
+    if (first == last) {
+        return temp;
+    }
+    int index = search(inOrder, first, last, temp -> val);
+    temp -> left = buildTree(inOrder, preOrder, first, (index - 1), preIndex);
+    temp -> right = buildTree(inOrder, preOrder, (index + 1), last, preIndex);
+    return temp;
+}
+
+int search(VI &inOrder, int first, int last, int value) {
+    for (int i = first; i <= last; i++) {
+        if (inOrder[i] == value) {
             return i;
+        }
     }
     return -1;
 }
 
-int cmp(const PI &A, const PI &B) {
-    return (A.second > B.second) ? 1 : 0;
+bool checkBST(TreeNode *n, int &last_print) {
+    if (n == NULL) {
+        return 1;
+    }
+    if(!checkBST(n -> left, last_print)) {
+        return 0;
+    }
+
+    if (last_print == INT_MIN && n -> val == last_print) {
+        return 0;
+    }
+
+    if (last_print != INT_MIN && n -> val <= last_print) {
+        return 0;
+    }
+    last_print = n -> val;
+
+    if (!checkBST(n -> right, last_print)) {
+        return 0;
+    }
+    return 1;
 }
 
 int main() {
-    VPI A;
-    FOR(i, 0, 6) {
-        int x, y;
-        SC(x); SC(y);
-        A.push_back(make_pair(x, y));
-    }
-    sort(A.begin(), A.end(), cmp);
-    VPI :: iterator it = A.begin();
-    for(; it != A.end(); it++) {
-        printf("%d %d\n", it->first, it->second);
+    int N, K;
+    SC(N);
+    FOR(i, 0, N) {
+        SC(K);
+
     }
     return 0;
 }
-
-
-
-
-
-
-
 
 
 

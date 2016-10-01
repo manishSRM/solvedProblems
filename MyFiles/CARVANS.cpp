@@ -36,37 +36,35 @@ typedef vector<PI> VPI;
 typedef vector<VI> VVI;
 typedef map<int,int> MP;
 
-int partition (VI &A, int p, int r) {
-	int x = A[r];
-	int i = p - 1;
-	EFOR(j, p, r - 1) {
-		if (A[j] <= x) {
-			i += 1;
-			swap(A[j], A[i]);
-		}
-	}
-	swap(A[i + 1], A[r]);
-	return (i + 1);
+int  inline scan() {
+    int N = 0;
+    char C;
+    C=getchar_unlocked();
+    while (C < '0' || C>'9') C=getchar_unlocked();
+    while (C >= '0' && C <= '9')
+    {
+        N = (N<<3) + (N<<1) + C - '0';
+        C=getchar_unlocked();
+    }
+    return N;
 }
-
-void quickSort (VI &A, int p, int r) {
-	if (p < r) {
-		int q = partition(A, p, r);
-		quickSort(A, p, q - 1);
-		quickSort(A, q + 1, r);
-	}
-}
-
-int main () {
-	int N;
-	SC(N);
-	VI A(N);
-	FOR (i, 0, N) {
-		SC(A[i]);
-	}
-	quickSort (A, 0, N-1);
-	FOR(i, 0, N)
-		printf("%d ", A[i]);
-	printf("\n");
-	return 0;
+int main() {
+    int T;
+    T = scan();
+    while(T--) {
+        int c = 1;
+        int N, A;
+        N = scan();
+        A = scan();
+        FOR(i, 1, N) {
+            int B;
+            B = scan();
+            if(B <= A) {
+                A = B;
+                c++;
+            }
+        }
+        printf("%d\n", c);
+    }
+    return 0;
 }
