@@ -1,0 +1,190 @@
+*  A private member variable or function cannot be accessed, or even viewed from outside the class. Only the class and
+   friend functions can access private members.
+*  If a copy constructor is not defined in a class, the compiler itself defines one.
+*  If the class has pointer variables and has some dynamic memory allocations, then it is a must to have a copy constructor.
+    classname (const classname &obj) {
+       // body of constructor
+    }
+*  A destructor is a special member function of a class that is executed whenever an object of it's class goes out of scope or
+   whenever the delete expression is applied to a pointer to the object of that class.
+*  A protected member variable or function is very similar to a private member but it provided one additional benefit that they
+   can be accessed in child classes which are called derived classes.
+
+            /*********** Abstract class ***************/
+
+* It can not be instantiated.
+* It has at least one or more pure virtual (abstract) function.
+
+ example:
+ class AbstractClass {
+    public:
+      virtual void AbstractMemberFunction() = 0; // Pure virtual function makes
+                                                 // this class Abstract class.
+      virtual void NonAbstractMemberFunction1(); // Virtual function.
+
+      void NonAbstractMemberFunction2();
+};
+
+* A pure virtual function is one which must be overridden by any concrete (i.e., non-abstract) derived class.
+
+/************** Interface ********************/
+
+* An interface has no implementation.
+* An interface class contains only a virtual destructor and pure virtual functions.
+
+example:
+class shape   // An interface class
+{
+  public:
+    virtual ~shape();
+    virtual void move_x(int x) = 0;
+    virtual void move_y(int y) = 0;
+    virtual void draw() = 0;
+//...
+};
+
+* Every interface class should have a virtual destructor.
+* Virtual destructor makes sure that when a shape is deleted polymorphically, correct destructor of the derived class is invoked.
+
+
+ref1 : http://www.tutorialspoint.com/cplusplus/cpp_interfaces.htm
+ref2 : http://www.cplusplus.com/forum/beginner/157568/
+
+/*********** DIFFERENCE ******************/
+* abstract classes may contain state (data members) and/or implementation (methods).
+* a class that implements an interface must provide an implementation of all the method of that interface.
+* interfaces can have no state or implementation.
+* abstract classes can be inherited without implementing the abstract methods (though such a derived class is abstract itself).
+
+/**************** friend function **************/
+
+ref : http://geeksquiz.com/friend-class-function-cpp/
+ref : http://www.cprogramming.com/tutorial/friends.html
+
+* A friend function of a class is defined outside that class' scope but it has the right to access all private and protected
+  members of the class. Even though the prototypes for friend functions appear in the class definition, friends are not member functions.
+* Friend Function Like friend class, a friend function can be given special grant to access private and protected members.
+  A friend function can be:
+  a) A method of another class
+  b) A global function
+* In java, it doesn't
+
+example :
+class Box
+{
+   double width;
+public:
+   double length;
+   friend void printWidth( Box box );
+   void setWidth( double wid );
+};
+
+void printWidth(Box box);
+
+* passing object for accessing all the data members of that class.
+
+* A friend can be a function, function template, or member function, or a class or class template, in which case the entire
+  class and all of its members are friends.
+
+/***************** this POINTER ********************/
+* The this pointer is an implicit parameter to all member functions.
+* Friend functions do not have a this pointer, because friends are not members of a class. Only member functions have a this pointer.
+
+ref : http://www.tutorialspoint.com/cplusplus/cpp_this_pointer.htm
+
+* Static member functions have a class scope and they do not have access to the this pointer of the class.
+* You could use a static member function to determine whether some objects of the class have been created or not.
+
+/******************** OPERATOR OVERLOADING ******************/
+ref:  http://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
+
+(::, .*, ., ?:) -> can not be overloaded.
+
+/*********************** POLYMORPHISM ***********************/
+
+ref: http://www.tutorialspoint.com/cplusplus/cpp_polymorphism.htm
+
+* The word polymorphism means having many forms. Typically, polymorphism occurs when there is a hierarchy of classes and
+  they are related by inheritance.
+* C++ polymorphism means that a call to a member function will cause a different function to be executed depending on the type
+  of object that invokes the function.
+
+static linkage: The function call is fixed at the time of compilation called as the static resolution or early binding.
+
+** by making the base class function virtual gives u the correct output because this time it signals to the compiler that we don't
+   want static linkage for this function. So the compiler will looks into the (*shape) base pointer.
+
+dynamic linkage: The selection of function to be called at any point in the program to be based on kind of object for which is called is
+                 called. This sort of operation is referred to as dynamic linkage, or late binding.
+
+
+
+/****************** VOLATILE KEYWORD in C++ *******************/
+
+example :
+int some_int = 100;
+
+while(some_int == 100)
+{
+   //your code
+}
+
+When this program gets compiled, the compiler may optimize this code, if it finds that the program never ever makes any attempt to change the value of some_int, so it may be tempted to optimize the while loop by changing it from while(some_int == 100) to simply while(true) so that the execution could be fast (since the condition in while loop appears to be true always). (if the compiler doesn't optimize it, then it has to fetch the value of some_int (if it's not loaded on a register) and compare it with 100, each time which obviously is a little bit slow.)
+
+However, sometimes, optimization (of some parts of your program) may be undesirable, because it may be that someone else is changing the value of some_int from outside the program which compiler is not aware of, since it can't see it; but it's how you've designed it. In that case, compiler's optimization would not produce the desired result!
+
+So, to ensure the desired result, you need to somehow stop the compiler from optimizing the while loop. That is where the volatile keyword plays it's role. All you need to do is this,
+
+volatile int some_int = 100; //note the 'volatile' qualifier now!
+
+/************************** STORAGE CLASSES ************************/
+
+ref : http://www.tutorialspoint.com/cplusplus/cpp_storage_classes.htm
+
+/************************ NAMESPACE ********************/
+
+ref : http://www.tutorialspoint.com/cplusplus/cpp_namespaces.htm
+
+scene : Same situation can arise in your C++ applications. For example, you might be writing some code that has a function called xyz() and there is another library available which is also having same function xyz(). Now the compiler has no way of knowing which version of xyz() function you are referring to within your code.
+
+* A namespace is designed to overcome this difficulty and is used as additional information to differentiate similar functions, classes, variables etc. with the same name available in different libraries. Using namespace, you can define the context in which names are defined. In essence, a namespace defines a scope.
+
+defining a namespace:
+namespace namespace_name {
+   // code declarations
+}
+
+calling function/variable for a particual version which defines under any predefined namespace then,
+
+name::code;   where name defines the "namespace_name" & code for calling function.
+
+The using dorectives example:
+
+#include <iostream>
+using namespace std;
+
+// first name space
+namespace first_space{
+   void func(){
+      cout << "Inside first_space" << endl;
+   }
+}
+// second name space
+namespace second_space{
+   void func(){
+      cout << "Inside second_space" << endl;
+   }
+}
+using namespace first_space;
+int main ()
+{
+
+   // This calls function from first name space.
+   func();
+
+   return 0;
+}
+
+o/p : Inside first_space
+
+
