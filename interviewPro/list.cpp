@@ -107,6 +107,7 @@ ListNode *reverseKGroup(ListNode *head, int k) {
     }
     return newHead;
 }
+
 void rotate(struct ListNode **head_ref, int K) {
     ListNode *current = *head_ref;
     int count = 1;
@@ -208,7 +209,7 @@ void deleteMiddle(ListNode *head) {
     prev -> next = prev -> next -> next;
 }
 
-ListNode* removeDuplicate(ListNode *head) {
+ListNode* removeDuplicate1(ListNode *head) {
     ListNode *temp = head;
     while (head) {
         ListNode *run = head;
@@ -224,10 +225,64 @@ ListNode* removeDuplicate(ListNode *head) {
     return temp;
 }
 
+ListNode* removeDuplicate2(ListNode *head) {
+    if (!head || !(head -> next))
+        return head;
+    ListNode *p1 = head;
+    while (p1 -> next) {
+        ListNode *temp = p1 -> next;
+        if (p1 -> val == temp -> val) {
+            while (p1->next && p1 -> next -> val == temp -> val) {
+                p1 -> next = p1 -> next -> next;
+            }
+            temp -> next = p1;
+        } else {
+            p1 = p1 -> next;
+        }
+    }
+    return head;
+}
+
+void insertAndMove(ListNode* &newHead, ListNode* &newTail, ListNode* &current) {
+    ListNode *temp = current;
+    current = current -> next;
+    temp -> next = NULL;
+    if (!newTail) {
+        newHead = newTail = temp;
+    } else {
+        newTail -> next = temp;
+        newTail = temp;
+    }
+}
+
+ListNode* mergeSortedLists(ListNode *A, ListNode *B) {
+    ListNode *newHead = NULL;
+    ListNode *newTail = NULL;
+    while (A && B) {
+        if (A->val <= B->val) {
+            insertAndMove(newHead, newTail, A);
+        } else {
+            insertAndMove(newHead, newTail, B);
+        }
+    }
+    if (A) {
+        while (A) {
+            insertAndMove(newHead, newTail, A);
+        }
+    }
+    if (B) {
+        while (B) {
+            insertAndMove(newHead, newTail, B);
+        }
+    }
+    return newHead;
+}
+
 int main() {
     ListNode *A = makeList();
-    deleteMiddle(A);
-    printList(A);
+    ListNode *B = makeList();
+    ListNode *C = mergeSortedLists(A, B);
+    printList(C);
     return 0;
 }
 
